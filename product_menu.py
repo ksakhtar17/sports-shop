@@ -43,7 +43,14 @@ class Window(tk.Tk):  # class window created and is inheriting from built-in cla
         self.img_lab2 = Label(self.image_frame, image=self.img3)
         self.img_lab2.pack()
 
-        self.tabs = Tabs(self, update)  # instantiating the tab class within the Window class to demonstrate composition relationship
+        self.tabs = Tabs(self, update)   # instantiating the tab class within the Window class to demonstrate composition relationship
+
+        self.button = Button(self, text='Proceed', command=lambda: self.proceed_and_destroy)
+        self.button.pack()
+
+    def proceed_and_destroy(self):
+        self.update.save_cart()
+        self.destroy()
 
 
 class Tabs: # class designated for creating tabs
@@ -223,4 +230,7 @@ class Tabs: # class designated for creating tabs
 u = UpdateCart()
 window = Window(u)
 window.mainloop()
-print(u.cart)
+
+from view_cart import ViewCart
+
+ViewCart()
